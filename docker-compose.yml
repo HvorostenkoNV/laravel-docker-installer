@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  laravel-downloader:
+    build: ./laravel-downloader
+    image: laravel-downloader
+    environment:
+      CONTAINER_APP_PATH: /app
+    volumes:
+      ${SRC_HOST_PATH}: /app
+  laravel-updater:
+    image: composer
+    depends_on:
+      - laravel-downloader
+    volumes:
+      ${SRC_HOST_PATH}: /app
